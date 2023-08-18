@@ -15,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           SvgPicture.asset(
             'assets/images/bg.svg',
-            width: double.infinity,
+            fit: BoxFit.fill,
           ),
           SafeArea(
             child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/views/screens/quiz_screen.dart';
 import 'package:quiz_app/views/screens/welcome_screen.dart';
 
 void main() {

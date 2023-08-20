@@ -40,8 +40,7 @@ class _ProgressBarState extends State<ProgressBar>
         if (BlocProvider.of<QuestionsCubit>(context).isAnswered) {
           controller.stop();
         }
-        if (BlocProvider.of<QuestionsCubit>(context).reset ||
-            BlocProvider.of<QuestionsCubit>(context).isSkiped) {
+        if (BlocProvider.of<QuestionsCubit>(context).reset) {
           Future.delayed(const Duration(seconds: 2), () {
             controller.reset();
             controller.forward().whenComplete(

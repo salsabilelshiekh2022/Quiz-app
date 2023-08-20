@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/cubit/questions_cubit.dart';
 import 'package:quiz_app/views/screens/quiz_screen.dart';
-import 'package:quiz_app/views/screens/welcome_screen.dart';
+import 'package:quiz_app/views/screens/score_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'Quiz App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: QuizScreen(),
+        home: ScoreScreen(),
       ),
     );
   }

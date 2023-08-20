@@ -1,5 +1,5 @@
 class Question {
-  final int id, answer;
+  int id, answer;
   final String question;
   final List<String> options;
 
@@ -37,3 +37,11 @@ const List sampleData = [
     "answer_index": 2,
   },
 ];
+
+List<Question> questions = sampleData
+    .map((question) => Question(
+        id: question['id'],
+        question: question['question'],
+        answer: question['answer_index'],
+        options: question['options']))
+    .toList();

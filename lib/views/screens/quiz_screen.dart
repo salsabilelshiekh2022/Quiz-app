@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:quiz_app/constants.dart';
-
+import '../../constants.dart';
+import '../../cubit/questions_cubit.dart';
+import '../../models/questions.dart';
 import '../widgets/progress_bar.dart';
+import '../widgets/question_card.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
@@ -16,7 +19,9 @@ class QuizScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<QuestionsCubit>(context).nextQuestion();
+            },
             child: const Text(
               "Skip",
               style: TextStyle(
@@ -33,10 +38,64 @@ class QuizScreen extends StatelessWidget {
             'assets/images/bg.svg',
             fit: BoxFit.fill,
           ),
-          const SafeArea(
+          SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProgressBar(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  child: ProgressBar(),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  child: BlocBuilder<QuestionsCubit, QuestionsState>(
+                    builder: (context, state) {
+                      return Text.rich(
+                        TextSpan(
+                            text:
+                                "Question ${BlocProvider.of<QuestionsCubit>(context).selectQuestion} ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  color: kSecondaryColor,
+                                ),
+                            children: [
+                              TextSpan(
+                                text: "/${questions.length}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(color: kSecondaryColor),
+                              ),
+                            ]),
+                      );
+                    },
+                  ),
+                ),
+                const Divider(
+                  thickness: 1.5,
+                ),
+                const SizedBox(
+                  height: kDefaultPadding,
+                ),
+                Expanded(
+                  child: PageView.builder(
+                      controller: BlocProvider.of<QuestionsCubit>(context)
+                          .pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => QuestionCard(
+                            question: questions[index],
+                          ),
+                      itemCount: questions.length),
+                ),
+                const SizedBox(
+                  height: kDefaultPadding,
+                )
               ],
             ),
           )

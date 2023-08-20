@@ -36,7 +36,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
       emit(QuestionWrong());
     }
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       nextQuestion(context);
       selectQuestion = id == 4 ? id : id + 1;
       emit(QuestionChange());
@@ -64,7 +64,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
       reset = false;
 
       pageController.nextPage(
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
         curve: Curves.ease,
       );
     } else {

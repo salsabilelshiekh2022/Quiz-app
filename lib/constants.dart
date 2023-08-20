@@ -12,4 +12,3 @@ const kPrimaryGradient = LinearGradient(
 );
 
 const double kDefaultPadding = 20.0;
-bool reset = false;

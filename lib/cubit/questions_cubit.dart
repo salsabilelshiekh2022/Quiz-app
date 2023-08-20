@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/models/questions.dart';
 
+import '../views/screens/score_screen.dart';
+
 part 'questions_state.dart';
 
 class QuestionsCubit extends Cubit<QuestionsState> {
@@ -19,7 +21,8 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   bool isSkiped = false;
   int numOfCorrectAns = 0;
   late int selectQuestion = 1;
-  checkAnswer(Question question, int selectedIndex, int id) {
+  checkAnswer(
+      Question question, int selectedIndex, int id, BuildContext context) {
     isAnswered = true;
     reset = true;
     selectQuestion = id;
@@ -34,8 +37,8 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     }
 
     Future.delayed(const Duration(seconds: 2), () {
-      nextQuestion();
-      selectQuestion = id + 1;
+      nextQuestion(context);
+      selectQuestion = id == 4 ? id : id + 1;
       emit(QuestionChange());
     });
   }
@@ -55,14 +58,20 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     return getRightColor(index) == kRedColor ? Icons.close : Icons.done;
   }
 
-  nextQuestion() {
+  nextQuestion(BuildContext context) {
     if (selectQuestion != questions.length) {
       isAnswered = false;
+      reset = false;
 
       pageController.nextPage(
         duration: const Duration(seconds: 2),
         curve: Curves.ease,
       );
-    } else {}
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ScoreScreen()),
+      );
+    }
   }
 }

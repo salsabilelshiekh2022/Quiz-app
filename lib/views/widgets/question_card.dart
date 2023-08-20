@@ -36,7 +36,7 @@ class QuestionCard extends StatelessWidget {
               question: question,
               onTap: () {
                 BlocProvider.of<QuestionsCubit>(context)
-                    .checkAnswer(question, index, question.id);
+                    .checkAnswer(question, index, question.id, context);
               }),
         )
       ]),

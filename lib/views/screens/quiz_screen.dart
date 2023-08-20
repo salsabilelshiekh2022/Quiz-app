@@ -20,7 +20,7 @@ class QuizScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              BlocProvider.of<QuestionsCubit>(context).nextQuestion();
+              BlocProvider.of<QuestionsCubit>(context).nextQuestion(context);
             },
             child: const Text(
               "Skip",

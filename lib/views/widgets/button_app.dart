@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 
 class ButtonApp extends StatelessWidget {
-  const ButtonApp({super.key});
+  const ButtonApp({super.key, this.onTap});
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(15),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_app/views/screens/quiz_screen.dart';
 
 import '../../constants.dart';
 import '../widgets/button_app.dart';
@@ -37,7 +38,13 @@ class WelcomeScreen extends StatelessWidget {
                   const Spacer(),
                   const TextFieldApp(),
                   const Spacer(),
-                  const ButtonApp(),
+                  ButtonApp(onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const QuizScreen()),
+                    );
+                  }),
                   const Spacer(
                     flex: 2,
                   ),
